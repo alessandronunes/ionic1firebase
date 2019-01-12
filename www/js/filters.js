@@ -1,0 +1,38 @@
+angular.module('starter').filter('cut', function () {
+    return function (value, wordwise, max, tail) {
+        if (!value) return '';
+
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
+
+        value = value.substr(0, max);
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace !== -1) {
+              //Also remove . and , so its gives a cleaner result.
+              if (value.charAt(lastspace-1) === '.' || value.charAt(lastspace-1) === ',') {
+                lastspace = lastspace - 1;
+              }
+              value = value.substr(0, lastspace);
+            }
+        }
+
+        return value + (tail || ' …');
+    };
+});
+
+angular.module('starter').filter('minutesAgo', function ($filter) {
+  return function (value, format) {
+      if (!value) return '';
+
+      var dateNow = Date.now();
+      var dif = dateNow - value;
+
+      if(dif < 3600000){
+        return parseInt(dif/60000)+' minutes ago';
+      }else{
+        return  $filter('date')(value, format)
+      }
+  };
+});

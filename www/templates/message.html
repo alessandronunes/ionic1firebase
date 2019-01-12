@@ -1,0 +1,11 @@
+<ion-view view-title="">
+  <ion-content>
+    <div class="message">
+      <a class="item card item-text-wrap" href="#/app/message/{{message.id}}">
+        <div class="date">{{message.date | minutesAgo:'MM-dd-yyyy HH:mm' }}</div>
+        <div class="title">{{message.title}}</div>
+        <div class="text">{{message.text}}</div>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
